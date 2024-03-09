@@ -1,0 +1,46 @@
+{% extends 'app.html' %}
+{% block content %}
+
+
+
+<div class="p-2">
+   
+    <div class="row g-2">
+        <div class="col-3">
+            <!-- addnew  -->
+            <div class="card" style="height: 100%;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="fs-5 fw-bold">Add Capstone Project</p>
+                        </div>
+                        <div class="col-6 text-center">
+                            <i class="bi bi-plus-lg fw-bolder" style="font-size: 5em;"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="card-footer text-center mb-0">Click here to add</p>
+            </div>
+        </div>
+        {% for i in range(20) %}
+        <div class="col-3">
+            <!-- Card Sample -->
+            <div class="card" style="height: 100%;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="fs-5 fw-bold">Some Amazing Thesis Title</p>
+                        </div>
+                        <div class="col-6">
+                            <img src="https://picsum.photos/200" alt="" class="mw-100" style="height: auto;">
+                        </div>
+                    </div>
+                </div>
+                <a href="" class="card-footer text-center">More-info</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
