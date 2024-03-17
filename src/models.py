@@ -13,7 +13,7 @@ class User(db.Model):
 class Project(db.Model):
     __tablename__ = 'projects'
     id = db.Column(db.Integer, primary_key=True)
-    title  = db.Column(db.String(20), nullable=False)
-    discription = db.Column(db.String(300), nullable=False)
+    title = db.Column(db.String(20), nullable=False)
+    description = db.Column(db.String(300), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
     

@@ -6,9 +6,9 @@ from src.models import db
 app = Flask(__name__)
 
 def main():
-
+    
     app.config.update({
-        'SQLALCHEMY_DATABASE_URI' : 'sqlite:///aralin.sqlite'
+        'SQLALCHEMY_DATABASE_URI' : 'sqlite:///aralin.db'
     })
     
     app.register_blueprint(web)
