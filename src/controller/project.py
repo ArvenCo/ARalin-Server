@@ -30,3 +30,7 @@ class ProjectController:
             image.save(os.path.join(image_upload_path, image.filename))
         video.save(os.path.join(video_upload_path, video.filename))
     
+    def gerate_qr(data):
+        image = requests.get(url=f'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data={data}')
+        return send_file(path_or_file=io.BytesIO(image.content), download_name=f'{data} - QR.png', as_attachment=True)
+    
