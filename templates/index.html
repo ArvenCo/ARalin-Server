@@ -6,25 +6,24 @@
 <div class="p-2">
     <div class="mt-5 mb-3">
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Create
+            Add Project
         </button>
     </div>
-    <div class="row g-2">
-        {% for i in range(20) %}
+    <div class="row gx-3 gy-3">
+        {% for project in projects  %}
         <div class="col-3">
             <!-- Card Sample -->
-            <div class="card" style="height: 100%;">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <p class="fs-5 fw-bold">Some Amazing Thesis Title</p>
-                        </div>
-                        <div class="col-6">
-                            <img src="https://picsum.photos/200" alt="" class="mw-100" style="height: auto;">
-                        </div>
-                    </div>
+            <div class="card mx-auto" style="width: 18rem" >
+                <div class="d-flex justify-content-center align-contents-center" style="width: 100% !important; height: 56.25%!important;">
+                    <!-- <div class="" style=" max-height: 56.25% !important;">
+                        <img src="https://picsum.photos/300"  class="w-100 h-100" alt="...">
+                    </div> -->
                 </div>
-                <a href="" class="card-footer text-center">More-info</a>
+                <div class="card-body">
+                  <h5 class="card-title">{{ project.title }}</h5>
+                  <p class="card-text">{{ project.description }}</p>
+                  <a href="{{ url_for('web.generate', data=project.title)}}" class="btn btn-primary">Generate QR<i class="bi bi-qr-code ms-2"></i></a>
+                </div>
             </div>
         </div>
         {% endfor %}
