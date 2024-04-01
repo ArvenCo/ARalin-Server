@@ -34,3 +34,20 @@ class ProjectController:
         image = requests.get(url=f'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data={data}')
         return send_file(path_or_file=io.BytesIO(image.content), download_name=f'{data} - QR.png', as_attachment=True)
     
+
+    def get_chunk(id, byte1=None, byte2=None):
+        full_path = f'static/uploads/{id}/video/project.mp4'
+        file_size = os.stat(full_path).st_size
+        start = 0
+        
+        if byte1 < file_size:
+            start = byte1
+        if byte2:
+            length = byte2 + 1 - byte1
+        else:
+            length = file_size - start
+
+        with open(full_path, 'rb') as f:
+            f.seek(start)
+            chunk = f.read(length)
+        return chunk, start, length, file_size

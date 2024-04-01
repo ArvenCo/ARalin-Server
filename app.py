@@ -1,6 +1,7 @@
 from libs import *
 
 from src.routes.web import web
+from src.routes.stream import stream
 from src.models import db
 
 app = Flask(__name__)
@@ -12,6 +13,7 @@ def main():
     })
     
     app.register_blueprint(web)
+    app.register_blueprint(stream)
     db.init_app(app)
 
     with app.app_context():
