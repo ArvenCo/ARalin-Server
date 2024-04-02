@@ -37,6 +37,7 @@ class ProjectController:
 
     def get_chunk(id, byte1=None, byte2=None):
         full_path = f'static/uploads/{id}/video/project.mp4'
+        if not os.path.exists(full_path) : return "Video Not Found", 404
         file_size = os.stat(full_path).st_size
         start = 0
         
