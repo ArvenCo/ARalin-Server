@@ -21,3 +21,12 @@ def project():
 @web.route('/generate/<data>')
 def generate(data):
     return ProjectController.gerate_qr(data)
+
+@web.route('/images')
+def images():
+    id = request.args.get('id')
+    images = []
+    for file in ProjectController.get_images(id):
+        images.append( url_for('static', filename=f'uploads/{id}/images/{file}'))
+    return jsonify(images)
+

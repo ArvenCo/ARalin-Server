@@ -52,3 +52,7 @@ class ProjectController:
             f.seek(start)
             chunk = f.read(length)
         return chunk, start, length, file_size
+    
+    def get_images(id):
+        return os.listdir(f'static/uploads/{id}/images')
+        
