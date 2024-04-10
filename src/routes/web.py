@@ -19,6 +19,11 @@ def project():
     ProjectController.store()
     return redirect(url_for('web.index'))
 
+@web.route('/edit/<id>', methods=['POST', 'GET'])
+def edit(id):
+    if request.method == 'POST':
+        return 
+    return ProjectController.show(id=id)
 
 @web.route('/generate/<data>')
 def generate(data):

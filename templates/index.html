@@ -28,7 +28,7 @@
                     <p class="card-text">{{ project.description }}</p>
                     <div>
                         <a href="{{ url_for('web.generate', data=project.title)}}" class="btn btn-primary">Generate QR<i class="bi bi-qr-code ms-2"></i></a>
-                        <a href="#" class="btn text-primary btn-sm float-end my-auto"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ url_for('web.edit', id=project.id)}}" class="btn text-primary btn-sm float-end my-auto"><i class="bi bi-pencil-square"></i></a>
                     </div>
                 </div>
             </div>

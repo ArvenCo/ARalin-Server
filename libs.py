@@ -4,6 +4,6 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from flask_bcrypt import Bcrypt
 
 from datetime import datetime
-import os, re
+import os, re, shutil
 import requests
 import io

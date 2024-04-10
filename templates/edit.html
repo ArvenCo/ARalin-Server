@@ -1,0 +1,39 @@
+{% extends 'app.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <strong> Edit - {{ project.title }}</strong>
+        </div>
+        <div class="card-body">
+            <form action="">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" id="title" class="form-control" value="{{ project.title }}">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description" id="description" row="30" class="form-control">{{ project.description }}</textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="images" class="form-lavel">Images</label>
+                    <input type="file" name="images" id="images" class="form-control" accept="image/*" multiple>
+                    <div class="w-100 overflow-x-auto d-flex">
+                        {% for image in images %}
+                            <img src="{{ url_for('static', filename='uploads/1/images/'+ image)}}" class="rounded  me-2 mb-2" style="height: 100px;" alt="">
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--  -->
+                <div class="mb-3">
+                    <label for="video" class="form-lavel">Video</label>
+                    <input type="file" name="video" id="video" class="form-control" accept="video/*">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
