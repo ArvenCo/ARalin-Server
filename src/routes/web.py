@@ -22,7 +22,7 @@ def project():
 @web.route('/edit/<id>', methods=['POST', 'GET'])
 def edit(id):
     if request.method == 'POST':
-        return 
+        return ProjectController.update(id)
     return ProjectController.show(id=id)
 
 @web.route('/generate/<data>')

@@ -36,16 +36,19 @@ class ProjectController:
         project = Project.query.get(id)
         return render_template('edit.html', project=project, images=os.listdir(f'static/uploads/{id}/images'))
     
-    def update(self, id):
+    def update(id):
+        
         project = Project.query.get(id)
         project.title = request.form['title']
         project.description = request.form['description']
         images = request.files.getlist('images')
         video = request.files['video']
-        
-        self._save_images(f"static/uploads/{id}/images", images)
-        self._save_video(f"static/uploads/{id}/video", video)
-        
+        if request.files.getlist('images')[0].filename != '':
+            _save_images(f"static/uploads/{id}/images", images)
+        if video.filename != '':
+            _save_video(f"static/uploads/{id}/video", video)
+        db.session.commit()
+        return redirect(url_for('web.edit', id=id))
 
     def gerate_qr(data):
         image = requests.get(url=f'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data={data}')
@@ -73,30 +76,30 @@ class ProjectController:
     def get_images(id):
         return os.listdir(f'static/uploads/{id}/images')
     
-    def _save_images(self, path, images):
-        self._clear_dir(path)
-        if not os.path.exists(path):
-            os.makedirs(path)
-        for image in images:
-            print(image.filename)
-            image.save(os.path.join(path, image.filename))
-    
-    def _save_video(self, path, video):
-        self._clear_dir(path)
-        if not os.path.exists(path):
-            os.makedirs(path)
-        video.save(os.path.join(path, 'project.mp4'))
+def _save_images( path, images):
+    _clear_dir(path)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    for image in images:
+        print(image.filename)
+        image.save(os.path.join(path, image.filename))
 
-    def _clear_dir(self, dir):
-        folder = dir  # Replace with the actual path to your folder
-        for filename in os.listdir(folder):
-            file_path = os.path.join(folder, filename)
-            try:
-                if os.path.isfile(file_path) or os.path.islink(file_path):
-                    os.unlink(file_path)  # Delete regular files or symbolic links
-                elif os.path.isdir(file_path):
-                    shutil.rmtree(file_path)  # Recursively delete subdirectories
-            except Exception as e:
-                print(f'Failed to delete {file_path}. Reason: {e}')
+def _save_video( path, video):
+    _clear_dir(path)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    video.save(os.path.join(path, 'project.mp4'))
+
+def _clear_dir( dir):
+    folder = dir  # Replace with the actual path to your folder
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)  # Delete regular files or symbolic links
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)  # Recursively delete subdirectories
+        except Exception as e:
+            print(f'Failed to delete {file_path}. Reason: {e}')
 
         

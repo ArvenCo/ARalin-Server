@@ -7,7 +7,7 @@
             <strong> Edit - {{ project.title }}</strong>
         </div>
         <div class="card-body">
-            <form action="">
+            <form action="{{ url_for('web.edit', id=project.id) }}" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="title" id="title" class="form-control" value="{{ project.title }}">
@@ -20,7 +20,7 @@
                 <div class="mb-3">
                     <label for="images" class="form-lavel">Images</label>
                     <input type="file" name="images" id="images" class="form-control" accept="image/*" multiple>
-                    <div class="w-100 overflow-x-auto d-flex">
+                    <div class="mt-2 w-100 overflow-x-auto d-flex">
                         {% for image in images %}
                             <img src="{{ url_for('static', filename='uploads/'+ project.id|string +'/images/'+ image)}}" class="rounded  me-2 mb-2" style="height: 100px;" alt="">
                         {% endfor %}
@@ -30,7 +30,13 @@
                 <div class="mb-3">
                     <label for="video" class="form-lavel">Video</label>
                     <input type="file" name="video" id="video" class="form-control" accept="video/*">
+                    <div class="mt-2">
+                        <video style="height: 220px;" controls>
+                            <source src="{{ url_for('stream.video', id=project.id)}}" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
+                <button class="btn btn-primary">Save</button>
             </form>
         </div>
     </div>
