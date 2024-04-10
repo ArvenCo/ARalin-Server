@@ -22,7 +22,7 @@
                     <input type="file" name="images" id="images" class="form-control" accept="image/*" multiple>
                     <div class="w-100 overflow-x-auto d-flex">
                         {% for image in images %}
-                            <img src="{{ url_for('static', filename='uploads/1/images/'+ image)}}" class="rounded  me-2 mb-2" style="height: 100px;" alt="">
+                            <img src="{{ url_for('static', filename='uploads/'+ project.id|string +'/images/'+ image)}}" class="rounded  me-2 mb-2" style="height: 100px;" alt="">
                         {% endfor %}
                     </div>
                 </div>
