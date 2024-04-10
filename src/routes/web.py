@@ -1,18 +1,20 @@
 from libs import *
 from src.controller.project import ProjectController
-
+from src.controller.auth import AuthController
 web = Blueprint('web', __name__)
 
 @web.route('/')
+@login_required
 def index():
-    
     return ProjectController.index()
 
 @web.route('/login')
 def login():
+    AuthController.create_admin()
     return render_template('auth/login.html')
 
 @web.route('/project', methods=['POST'])
+@login_required
 def project():
     ProjectController.store()
     return redirect(url_for('web.index'))
