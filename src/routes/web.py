@@ -25,6 +25,10 @@ def edit(id):
         return ProjectController.update(id)
     return ProjectController.show(id=id)
 
+@web.route('/delete/<id>', methods=['POST'])
+def delete(id):
+    return ProjectController.delete(id=id)
+
 @web.route('/generate/<data>')
 def generate(data):
     return ProjectController.gerate_qr(data)

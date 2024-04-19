@@ -76,6 +76,11 @@ class ProjectController:
     def get_images(id):
         return os.listdir(f'static/uploads/{id}/images')
     
+    def delete(id):
+        Project.query.filter_by(id=id).delete()
+        shutil.rmtree(f'static/uploads/{id}')
+        return redirect(url_for('web.index'))
+    
 def _save_images( path, images):
     _clear_dir(path)
     if not os.path.exists(path):
