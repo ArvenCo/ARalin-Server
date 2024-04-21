@@ -13,6 +13,12 @@ def login():
     AuthController.create_admin()
     return render_template('auth/login.html')
 
+@web.route('/register-account')
+@login_required
+def register():
+    users = AuthController.users()
+    return render_template('auth/register.html', users=users)
+
 @web.route('/project', methods=['POST'])
 @login_required
 def project():

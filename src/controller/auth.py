@@ -10,6 +10,10 @@ def user_loader(id):
     return User.query.get(id)
 
 class AuthController():
+
+    def users():
+        users = User.query.filter(User.id != 1).all()
+        return users
     
     def login():
         username = request.form.get('username')
@@ -21,10 +25,10 @@ class AuthController():
         
         return redirect(url_for('web.login'))
 
-    def signup():
-        username = request.form.get('username')
-        password = request.form.get('password')
-        confirm_password = request.form.get('confirm_password')
+    def signup(username, password, confirm_password):
+        # username = request.form.get('username')
+        # password = request.form.get('password')
+        # confirm_password = request.form.get('confirm_password')
 
         user = User.query.filter_by(username=username).first()
         if user is None and password == confirm_password:
@@ -33,9 +37,8 @@ class AuthController():
             db.session.commit()
 
             login_user(user)
-            return redirect(url_for('web.index'))
-
-        return redirect(url_for('web.signup'))
+            return True
+        return False
 
     def logout():
         logout_user()
